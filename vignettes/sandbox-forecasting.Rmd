@@ -1,0 +1,182 @@
+---
+title: "sandbox vignette"
+author: "Nick Reich"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+library(fpp3)
+```
+
+## Introduction
+
+This notebook is designed to walk through some simple forecasting using ARIMA models on Influenza-like Illness (ILI) data from the US CDC.
+The notebook will loosely follow the [ARIMA chapter of the Forecasting Principles and Practice textbook](https://otexts.com/fpp3/arima.html).
+
+## Load in some CDC flu data
+
+```{r}
+flu_data <- pub_fluview(regions = "nat", 
+                        epiweeks = epirange(200335, 201735)) |> 
+  select(region, epiweek, wili) |> 
+  as_tsibble(index = epiweek, key = region)
+
+
+autoplot(flu_data, .vars = wili) +
+  labs(title = "National-level ILI data from the US CDC",
+       y = "weighted ILI (% of visits)")
+```
+
+Look at data and correlation plots. Partial correlation shows two significant lags, lots of auto-correlation.
+
+```{r}
+gg_tsdisplay(flu_data, y = wili, plot_type='partial')
+```
+
+
+First-order differencing still has some seasonality, so is not stationary, although better than the original time-series.
+```{r}
+flu_data |> 
+  gg_tsdisplay(difference(wili), plot_type='partial')
+```
+
+Seasonal differencing
+```{r}
+flu_data |> 
+  gg_tsdisplay(difference(wili, 52) |> difference(), 
+               plot_type='partial',
+               lag_max = 110) +
+  labs(title = "Double differenced", y = "")
+```
+
+
+See [this page](https://otexts.com/fpp3/non-seasonal-arima.html#acf-and-pacf-plots) for descriptions of interpreting ACF and PACF plots.
+Try out some models, using "auto" for automatic selection and a few hand-picked SARIMA specifications:
+
+ - spikes in ACF plot at lags 1-3 and 7-13 suggests up to AR(13) model!
+ - spike in PACF at 52 weeks suggests seasonal MA(1) model
+ 
+Since this plot already has first order differencing at the seasonal and non-seasonal levels, the above suggests the following models:
+
+ - ARIMA(3,1,2)(1,1,1)[52] 
+ - ARIMA(2,1,0)(0,1,1)[52].
+
+```{r}
+fit <- flu_data |>
+  model(
+    arima312111 = ARIMA(wili ~ pdq(3,1,2) + PDQ(0,1,1)[,52.18]),
+    arima210011 = ARIMA(wili ~ pdq(2,1,0) + PDQ(0,1,1)),
+    auto = ARIMA(wili, stepwise = FALSE, approx = FALSE)
+  )
+fit |> 
+  pivot_longer(-region, 
+               names_to = "Model name",
+               values_to = "Orders")
+glance(fit) |> arrange(AICc) |> select(.model:BIC)
+
+```
+
+
+Examine one fit
+```{r}
+fit |> select(auto) |> report()
+```
+
+
+
+Check residuals, selecting "auto" model which has lowest BIC:
+```{r}
+fit |> select(auto) |> gg_tsresiduals(lag=36)
+```
+
+
+Try with transformations, selecting "auto" model which again has best BIC.
+```{r}
+fourth_root <- function(x) x^0.25
+inv_fourth_root <- function(x) x^4
+
+my_fourth_root <- new_transformation(fourth_root, inv_fourth_root)
+
+fit_trans <- flu_data |>
+  model(
+    arima012011 = ARIMA(my_fourth_root(wili) ~ pdq(0,1,2) + PDQ(0,1,1)),
+    arima210011 = ARIMA(my_fourth_root(wili) ~ pdq(2,1,0) + PDQ(0,1,1)),
+    auto = ARIMA(my_fourth_root(wili))
+  )
+fit_trans |> 
+  pivot_longer(-region, 
+               names_to = "Model name",
+               values_to = "Orders")
+glance(fit_trans) |> arrange(AICc) |> select(.model:BIC)
+
+fit_trans |> 
+  select(auto) |> 
+  gg_tsresiduals(lag=36)
+
+fit_trans |> 
+  select(auto) |> 
+  report()
+```
+
+Testing out fourier terms to capture seasonality.
+```{r}
+# https://otexts.com/fpp3/complexseasonality.html#example-electricity-demand
+fit_trans_fourier <- flu_data |>
+  model(
+    dhr = ARIMA(my_fourth_root(wili) ~ PDQ(0,0,0) + pdq(d=0) +
+                  fourier(period = "year", K=5)))
+report(fit_trans_fourier)
+
+fit_trans_fourier |> 
+  gg_tsresiduals(lag=80)
+```
+
+Using seasonal terms
+```{r}
+# https://otexts.com/fpp3/complexseasonality.html#example-electricity-demand
+fit_trans_season <- flu_data |>
+  model(
+    dhr = ARIMA(my_fourth_root(wili) ~ PDQ(0,0,0) + pdq(d=0) +
+                  season(period = "365 days")))
+report(fit_trans_season)
+
+fit_trans_fourier |> 
+  gg_tsresiduals(lag=80)
+```
+
+Do some forecasting
+```{r}
+forecast(fit_trans_fourier, h=10) |>
+  filter(.model=='dhr') |>
+  autoplot(flu_data |> filter(epiweek >= as.Date("2017-01-01"))) +
+  labs(title = "WILI, US level",
+       y="% of visits")
+```
+
+
+## Seasonal model
+
+Since [weekly data is hard to work with](https://otexts.com/fpp3/weekly.html#weekly-data), we should either do a seasonal difference and then pass to `ARIMA()` or use a fourier series as a fixed x variable.
+
+
+
+## Outline of things to demo
+
+### Things to cover in "basic forecasting"
+
+1. looking at data, `gg_tsdisplay()`
+1. Fitting basic ARIMA model
+1. looking at fitted model, model output data and the forecast itself, including probabilistic representations
+1. Using `gg_tsresiduals()` to look at residuals
+1. fitting basic ARIMA with a transformation + residual inspection + probabilistic representation
+1. fitting ARIMA + `fourier()` to capture seasonality
+1. fitting model(s) above to multiple locations and at multiple timepoints
+
+### Things to cover in "intermediate forecasting"
+
+1. forecast evaluation
+1. Advanced model 1: pooling coefficients for ARIMA model
+1. Advanced model 2: feature extraction for GB model
+
+
