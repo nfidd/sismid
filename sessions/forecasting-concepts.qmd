@@ -88,6 +88,8 @@ flu_data <- epidatr::pub_fluview(regions = "nat",
                                  epiweeks = epirange(200335, 201735)) |> 
   select(region, epiweek, wili) |> 
   as_tsibble(index = epiweek, key = region)
+# You can type ?epidatr::pub_fluview 
+# to see more details about formatting for epirange()
 ```
 
 However, to ensure reproducibility (since this is a live dataset), we have downloaded this object for you already as of July 10, 2025, and it is available to load from the course R package directly.
