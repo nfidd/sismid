@@ -307,7 +307,7 @@ But which of these models do you think is doing the most reasonable (or least un
 Once again, there is not exactly a "right" answer here, but here are a few things to consider:
 
 -   The fact that both of the `_trans` forecasts (the ones with the fourth-root transformation) stay positive seems pretty critical. The other forecasts routinely predict impossible values!
--   The `arima210_trans` model has quite high uncertainty at longer horizons in a way that seems reasonable.
+-   The `arima110_trans` model has quite high uncertainty at longer horizons in a way that seems reasonable.
 
 Again, all of these forecasts are not very good, but they are progress.
 :::
