@@ -1,0 +1,2 @@
+"mean_wis","median_wis","mean_abs_error","median_abs_error","coverage_50_pct","coverage_80_pct","coverage_90_pct","coverage_96_pct","coverage_98_pct","n_forecasts"
+5.29308327198083,1.80506387181621,0.674031717139704,0.36983978117529,41.8645049218298,68.0081065431384,79.2414591777649,85.842501447597,90.0984365952519,3454

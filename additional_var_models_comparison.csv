@@ -1,0 +1,7 @@
+"Model","AICc","Status"
+"VAR(2) + season(52)",-26425.9479286507,"Success"
+"VAR(1) + season(52)",-49358.2259247282,"Success"
+"VAR(3) + season(52)",-23530.4675859259,"Success"
+"VAR(2) + season(52) + log",-15027.8157715455,"Success"
+"VAR(2) + trend + season(52)",-26046.4590848772,"Success"
+"VAR(2) + season(26)",-9281.2708513975,"Success"

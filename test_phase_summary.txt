@@ -1,0 +1,15 @@
+# Test Phase Forecast Summary
+
+**Model ID**: sismid-var2-sqrt
+**Origin Dates**: 80
+**Successful Forecasts**: 80
+**Total Forecast Rows**: 80960
+**Date Range**: 2017-10-21 to 2020-02-29
+
+## Next Steps:
+1. Fork the hub repository on GitHub
+2. Clone your fork locally
+3. Copy forecast files to your fork
+4. Commit and push
+5. Create pull request
+

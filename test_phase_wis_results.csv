@@ -1,0 +1,2 @@
+"model_id","wis","overprediction","underprediction","dispersion","bias","interval_coverage_50","interval_coverage_90","ae_median"
+"sismid-var1-optimal",0.465926367027843,0.137067048562946,0.215335575661076,0.113523742803822,-0.100191082802548,0.418645049218298,0.792414591777649,0.674031717139704

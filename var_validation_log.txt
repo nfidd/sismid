@@ -1,0 +1,99 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading required package: fabletools
+Registered S3 method overwritten by 'tsibble':
+  method               from 
+  as_tibble.grouped_df dplyr
+
+Attaching package: ‘tsibble’
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, union
+
+[1] "Processing 59 validation forecasts"
+[1] "Error with origin date 2015-10-17 : "
+[1] "Error with origin date 2015-10-24 : "
+[1] "Error with origin date 2015-10-31 : "
+[1] "Error with origin date 2015-11-07 : "
+[1] "Error with origin date 2015-11-14 : "
+[1] "Error with origin date 2015-11-21 : "
+[1] "Error with origin date 2015-11-28 : "
+[1] "Error with origin date 2015-12-05 : "
+[1] "Error with origin date 2015-12-12 : "
+[1] "Error with origin date 2015-12-19 : "
+[1] "Error with origin date 2015-12-26 : "
+[1] "Error with origin date 2016-01-02 : "
+[1] "Error with origin date 2016-01-09 : "
+[1] "Error with origin date 2016-01-16 : "
+[1] "Error with origin date 2016-01-23 : "
+[1] "Error with origin date 2016-01-30 : "
+[1] "Error with origin date 2016-02-06 : "
+[1] "Error with origin date 2016-02-13 : "
+[1] "Error with origin date 2016-02-20 : "
+[1] "Error with origin date 2016-02-27 : "
+[1] "Error with origin date 2016-03-05 : "
+[1] "Error with origin date 2016-03-12 : "
+[1] "Error with origin date 2016-03-19 : "
+[1] "Error with origin date 2016-03-26 : "
+[1] "Error with origin date 2016-04-02 : "
+[1] "Error with origin date 2016-04-09 : "
+[1] "Error with origin date 2016-04-16 : "
+[1] "Error with origin date 2016-04-23 : "
+[1] "Error with origin date 2016-04-30 : "
+[1] "Error with origin date 2016-05-07 : "
+[1] "Error with origin date 2016-10-22 : "
+[1] "Error with origin date 2016-10-29 : "
+[1] "Error with origin date 2016-11-05 : "
+[1] "Error with origin date 2016-11-12 : "
+[1] "Error with origin date 2016-11-19 : "
+[1] "Error with origin date 2016-11-26 : "
+[1] "Error with origin date 2016-12-03 : "
+[1] "Error with origin date 2016-12-10 : "
+[1] "Error with origin date 2016-12-17 : "
+[1] "Error with origin date 2016-12-24 : "
+[1] "Error with origin date 2016-12-31 : "
+[1] "Error with origin date 2017-01-07 : "
+[1] "Error with origin date 2017-01-14 : "
+[1] "Error with origin date 2017-01-21 : "
+[1] "Error with origin date 2017-01-28 : "
+[1] "Error with origin date 2017-02-04 : "
+[1] "Error with origin date 2017-02-11 : "
+[1] "Error with origin date 2017-02-18 : "
+[1] "Error with origin date 2017-02-25 : "
+[1] "Error with origin date 2017-03-04 : "
+[1] "Error with origin date 2017-03-11 : "
+[1] "Error with origin date 2017-03-18 : "
+[1] "Error with origin date 2017-03-25 : "
+[1] "Error with origin date 2017-04-01 : "
+[1] "Error with origin date 2017-04-08 : "
+[1] "Error with origin date 2017-04-15 : "
+[1] "Error with origin date 2017-04-22 : "
+[1] "Error with origin date 2017-04-29 : "
+[1] "Error with origin date 2017-05-06 : "
+[1] "\nGenerated 0 forecast rows"
+Error in `group_by()`:
+! Must group by variables found in `.data`.
+Column `model_id` is not found.
+Column `target` is not found.
+Column `location` is not found.
+Column `origin_date` is not found.
+Column `horizon` is not found.
+Column `target_end_date` is not found.
+Backtrace:
+    ▆
+ 1. ├─dplyr::group_split(...)
+ 2. ├─dplyr::group_by(...)
+ 3. └─dplyr:::group_by.data.frame(...)
+ 4.   └─dplyr::group_by_prepare(.data, ..., .add = .add, error_call = current_env())
+ 5.     └─rlang::abort(bullets, call = error_call)
+Execution halted
