@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Forecasting concepts – NFIDD SISMID</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../nfidd-favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-025db3b089a7e65f2676a8a92be6aa8b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-cf7d57c4dd082ca24ef0eaa224bbf258.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-025db3b089a7e65f2676a8a92be6aa8b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="Forecasting concepts – NFIDD SISMID">
+<meta property="og:description" content="Nowcasting and forecasting infectious disease dynamics - SISMID">
+<meta property="og:image" content="https://nfidd.github.io/sismid/sessions/forecasting-concepts_files/figure-html/data-first-plot-1.png">
+<meta property="og:site_name" content="NFIDD SISMID">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">NFIDD SISMID</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../getting-started.html"> 
+<span class="menu-text">Getting started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-sessions" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Sessions</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-sessions">    
+        <li>
+    <a class="dropdown-item" href="../sessions/introduction-and-course-overview.html">
+ <span class="dropdown-text">Introduction and course overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/delay-distributions.html">
+ <span class="dropdown-text">Delay distributions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/biases-in-delay-distributions.html">
+ <span class="dropdown-text">Biases in delay distributions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/using-delay-distributions-to-model-the-data-generating-process-of-an-epidemic.html">
+ <span class="dropdown-text">Using delay distributions to model the data generating process</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/R-estimation-and-the-renewal-equation.html">
+ <span class="dropdown-text"><span class="math inline">\(R_t\)</span> estimation and the renewal equation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/nowcasting.html">
+ <span class="dropdown-text">Nowcasting concepts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/joint-nowcasting.html">
+ <span class="dropdown-text">Nowcasting with an unknown reporting delay</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/forecasting-concepts.html">
+ <span class="dropdown-text">Forecasting concepts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/forecasting-models.html">
+ <span class="dropdown-text">Improving forecasting models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/forecast-evaluation.html">
+ <span class="dropdown-text">Forecast evaluation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/forecast-ensembles.html">
+ <span class="dropdown-text">Forecast ensembles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/real-world-forecasts.html">
+ <span class="dropdown-text">Evaluating real-world outbreak forecasts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/hub-playground.html">
+ <span class="dropdown-text">Local hub playground</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/forecasting-nowcasting.html">
+ <span class="dropdown-text">Combining nowcasting and forecasting</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/end-of-course-summary-and-discussion.html">
+ <span class="dropdown-text">End of course summary and discussion</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-reference" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Reference</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-reference">    
+        <li>
+    <a class="dropdown-item" href="../reference/sessions.html">
+ <span class="dropdown-text">Session timetable</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/learning_objectives.html">
+ <span class="dropdown-text">Learning outcomes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/help.html">
+ <span class="dropdown-text">Getting help</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/further_reading.html">
+ <span class="dropdown-text">Further reading</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/stan.html">
+ <span class="dropdown-text">Stan Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reference/using-our-stan-models.html">
+ <span class="dropdown-text">Using our Stan models</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../authors.html"> 
+<span class="menu-text">Authors</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/nfidd/sismid"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sessions/forecasting-concepts.html">Forecasting concepts</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sessions/introduction-and-course-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction and course overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sessions/delay-distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Delay distributions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sessions/biases-in-delay-distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Biases in delay distributions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sessions/using-delay-distributions-to-model-the-data-generating-process-of-an-epidemic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using delay distributions to model the data generating process</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sessions/R-estimation-and-the-renewal-equation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="math inline">\(R_t\)</span> estimation and the renewal equation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sessions/nowcasting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nowcasting concepts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sessions/joint-nowcasting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nowcasting with an unknown reporting delay</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sessions/forecasting-concepts.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Forecasting concepts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sessions/forecasting-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Improving forecasting models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sessions/forecast-evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Forecast evaluation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sessions/forecast-ensembles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Forecast ensembles</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sessions/real-world-forecasts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Evaluating real-world outbreak forecasts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sessions/hub-playground.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Local hub playground</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sessions/forecasting-nowcasting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Combining nowcasting and forecasting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sessions/end-of-course-summary-and-discussion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">End of course summary and discussion</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  </ul></li>
+  <li><a href="#what-is-forecasting" id="toc-what-is-forecasting" class="nav-link" data-scroll-target="#what-is-forecasting">What is forecasting?</a></li>
+  <li><a href="#getting-acquainted-with-ili" id="toc-getting-acquainted-with-ili" class="nav-link" data-scroll-target="#getting-acquainted-with-ili">Getting acquainted with ILI</a>
+  <ul class="collapse">
+  <li><a href="#look-at-the-data" id="toc-look-at-the-data" class="nav-link" data-scroll-target="#look-at-the-data">Look at the data</a></li>
+  </ul></li>
+  <li><a href="#fitting-a-simple-forecasting-model" id="toc-fitting-a-simple-forecasting-model" class="nav-link" data-scroll-target="#fitting-a-simple-forecasting-model">Fitting a simple forecasting model</a>
+  <ul class="collapse">
+  <li><a href="#anatomy-of-a-fable-forecast" id="toc-anatomy-of-a-fable-forecast" class="nav-link" data-scroll-target="#anatomy-of-a-fable-forecast">Anatomy of a fable forecast</a></li>
+  </ul></li>
+  <li><a href="#wrap-up" id="toc-wrap-up" class="nav-link" data-scroll-target="#wrap-up">Wrap up</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/nfidd/sismid/blob/main/sessions/forecasting-concepts.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/nfidd/sismid/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Forecasting concepts</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Epidemiological forecasts are statements about what might happen to population disease burden in the future. These statements sometimes will be a simple point estimate. Other times, they might be probabilistic, meaning they are making an explicit statistical statement about the probabilities of different future outcomes. In this session we will make some simple forecasts using a decades-old statistical modeling approach, Auto-Regressive Integrated Moving Average (ARIMA), which has also shown itself to be a very capable framework for making predictions of infectious diseases. We will see how we can visualise and interpret such forecasts.</p>
+<section id="slides" class="level2">
+<h2 class="anchored" data-anchor-id="slides">Slides</h2>
+<ul>
+<li><a href="slides/introduction-to-forecasting">Introduction to forecasting</a></li>
+</ul>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<p>The aim of this session is to introduce the concept of forecasting and forecast visualisation using a simple model.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Setup
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="source-file" class="level2">
+<h2 class="anchored" data-anchor-id="source-file">Source file</h2>
+<p>The source file of this session is located at <code>sessions/forecast-concepts.qmd</code>.</p>
+</section>
+<section id="libraries-used" class="level2">
+<h2 class="anchored" data-anchor-id="libraries-used">Libraries used</h2>
+<p>In this session we will use the <code>fable</code> package for fitting simple forecasting models, the <code>dplyr</code> package for data wrangling, the <code>ggplot2</code> library for plotting and the <code>epidatr</code> package for accessing and downloading versions of epidemiological surveillance data from the <a href="https://cmu-delphi.github.io/delphi-epidata/">Delphi EpiData API</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"nfidd"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"epidatr"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"feasts"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"fable"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The best way to interact with the material is via the <a href="https://docs.posit.co/ide/user/ide/guide/documents/visual-editor.html">Visual Editor</a> of RStudio.</p>
+</div>
+</div>
+</section>
+<section id="initialisation" class="level2">
+<h2 class="anchored" data-anchor-id="initialisation">Initialisation</h2>
+<p>We set a random seed for reproducibility. Setting this ensures that you should get exactly the same results on your computer as we do. This is not strictly necessary but will help us talk about the models.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">17</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="what-is-forecasting" class="level1">
+<h1>What is forecasting?</h1>
+<p>Forecasting is the process of making predictions about the future based on past and present data. In the context of infectious disease epidemiology, forecasting is usually the process of predicting the future course of some metric of infectious disease incidence or prevalence based on data available at the present time. In this session we focus on forecasting one particular outcome for influenza surveillance but forecasts can also be made for other quantities of interest such as the number of infections, the reproduction number, or the number of deaths. Epidemiological forecasting is closely related to nowcasting and, when using mechanistic approaches, estimation of the reproduction number.</p>
+<p>In previous sessions, the focus was on a setting where only limited data from a single outbreak was available. Starting with this session, we will focus on a setting where you have multiple prior “seasons” of data to model. This introduces new and different opportunities and complexities for modeling.</p>
+</section>
+<section id="getting-acquainted-with-ili" class="level1">
+<h1>Getting acquainted with ILI</h1>
+<p>Influenza-like illness (ILI) is a commonly used epidemiological surveillance measure for tracking the influenza season. An individual is classified as having ILI if they have a fever AND an additional “flu-like” symptom, such as a cough, headache, sore throat, etc… In the US, ILI data has been collected in a more or less consistent way for over 20 years at the national and state level. These data, including versions available at specific times, are available through the <a href="https://cmu-delphi.github.io/delphi-epidata/">Delphi EpiData API</a>. Specifically, the ILI signal that is published by the CDC measures the percentage of all outpatient doctor’s office visits due to ILI in a given epidemiological week.</p>
+<p>The following code downloads ILI data for the USA for all weeks starting with the 2003/2004 season through the start of the 2017/2018 season (epiweek 35 of 2017). Specifically, we use the weighted ILI variable (<code>wili</code>) which uses population-based weights estimate to try to generate a representative estimate of ILI for a specific population. We filter to only include columns that we need and convert the resulting object into a <code>tsibble</code> which is <a href="https://tsibble.tidyverts.org/">a special kind of time-series data frame</a>. Here is code to query the data from the Delphi EpiData API.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>flu_data <span class="ot">&lt;-</span> epidatr<span class="sc">::</span><span class="fu">pub_fluview</span>(<span class="at">regions =</span> <span class="st">"nat"</span>, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">epiweeks =</span> <span class="fu">epirange</span>(<span class="dv">200335</span>, <span class="dv">201735</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(region, epiweek, wili) <span class="sc">|&gt;</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> epiweek, <span class="at">key =</span> region)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>However, to ensure reproducibility (since this is a live dataset), we have downloaded this object for you already as of July 10, 2025, and it is available to load from the course R package directly. Further, we filter the data to the <em>start</em> of the 2017/2018 season for this session. This way we have some “unseen” data left for evaluation later.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(flu_data)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>flu_data <span class="ot">&lt;-</span> flu_data <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(epiweek <span class="sc">&lt;=</span> <span class="st">"2017-08-27"</span>) <span class="co"># Filter to start of 2017/2018 season</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What is an epiweek?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Measuring time is complicated. Epiweeks are a common unit of time in epidemiological surveillance data. Also referred to as <a href="https://ibis.doh.nm.gov/resource/MMWRWeekCalendar.html">MMWR weeks</a>, an epiweek starts on a Sunday and ends on a Saturday. Most years have 52 epiweeks. Some have 53. Week 1 of a specific year is the first week of the calendar year that has at least four days in it.</p>
+<p>In this particular dataset, <code>epidatr</code> labels a week with the date of the first Sunday in that week.</p>
+</div>
+</div>
+<section id="look-at-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="look-at-the-data">Look at the data</h2>
+<p>Here are the first 10 rows of the dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>flu_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tsibble: 732 x 3 [7D]
+# Key:       region [1]
+   region epiweek     wili
+   &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt;
+ 1 nat    2003-08-24 0.490
+ 2 nat    2003-08-31 0.736
+ 3 nat    2003-09-07 0.582
+ 4 nat    2003-09-14 0.654
+ 5 nat    2003-09-21 0.750
+ 6 nat    2003-09-28 0.884
+ 7 nat    2003-10-05 1.03 
+ 8 nat    2003-10-12 1.28 
+ 9 nat    2003-10-19 1.33 
+10 nat    2003-10-26 1.77 
+# ℹ 722 more rows</code></pre>
+</div>
+</div>
+<p>And here is a simple <code>ggplot</code>-style figure of the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(flu_data) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">x=</span>epiweek, <span class="at">y=</span>wili))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="forecasting-concepts_files/figure-html/data-first-plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>But note that one of the advantages of using <code>tsibbles</code> is that there are some default time-series plots that can be made:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(flu_data, <span class="at">.vars =</span> wili) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"National-level ILI data from the US CDC"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"weighted ILI (% of visits)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="forecasting-concepts_files/figure-html/first-autoplot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Take 5 minutes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Look at the plot of data carefully. Write down at least three observations about the data. Share notes with your neighbor. What features of this time-series make it easier or harder to predict?</p>
+</div>
+</div>
+</section>
+</section>
+<section id="fitting-a-simple-forecasting-model" class="level1">
+<h1>Fitting a simple forecasting model</h1>
+<p>To start with, we are going to use the <a href="https://fable.tidyverts.org/"><code>fable</code> package</a> to build some simple forecasting models.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Picking a modeling framework
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>There are lots of ways that you might want to consider building your own forecasting models in R. For example, <a href="https://cmu-delphi.github.io/epipredict/articles/index.html">the <code>epipredict</code> package</a> (modular forecasting designed by epidemiological forecasters), the <a href="https://business-science.github.io/modeltime/"><code>modeltime</code> R package</a>, and the <a href="https://business-science.github.io/timetk/"><code>timetk</code> R package</a> would all be reasonable places to start learning about working with time series data with a predictive lens. We are going to work with the <code>fable</code> package because it is actively developed, fairly mature, and makes it very easy to get up and running with some good, simple working examples.</p>
+<p>However, in our own research, we have found that often <code>fable</code> models don’t provide enough flexibility or complexity to capture all the features that we want. So, depending how far down this forecasting rabbit hole we are able to pull you, you may end up wanting to play around with more flexible tools like <code>epipredict</code>, or even “rolling your own” models using whatever software you are familiar with.</p>
+</div>
+</div>
+</div>
+<p>The <code>fable</code> package has a number of common forecasting models ready for you to use. In this session we’re just going to try one without thinking too much about what it is and why it might be good or bad. We’re going to start with an Auto-Regressive Integrated Moving Average (ARIMA) model. Some of the core ideas of ARIMA models have been in use for 100 years, although they have been around in their current form for the last 50.<span class="citation" data-cites="tsay2000time">(<a href="#ref-tsay2000time" role="doc-biblioref">Tsay 2000</a>)</span> We recommend <a href="https://otexts.com/fpp3/arima.html">the FPP3 ARIMA Chapter</a> as a good applied introduction to ARIMA modeling.</p>
+<p>We will talk more about ARIMA models in the next session. For now, think about it as, a linear regression model where the predictor variables are just the last <span class="math inline">\(p\)</span> values of the time-series, where in this case <span class="math inline">\(p=2\)</span>: <span class="math display">\[ y_t = \mu_t + \phi_1 y_{t-1} + \phi_2 y_{t-2} + \varepsilon_t.\]</span> Also, <span class="math inline">\(\mu_t\)</span> is a constant (like an intercept term in the regression), <span class="math inline">\(\phi_1\)</span> and <span class="math inline">\(\phi_2\)</span> are coefficients for the predictors, and <span class="math inline">\(\varepsilon_t\)</span> is a random error term with mean zero and constant variance.</p>
+<p>Here is code that fits models parameters based on all of the data that is passed to it, that is, all of the observations in <code>flu_data</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> flu_data <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>( <span class="at">arima200 =</span> <span class="fu">ARIMA</span>(wili <span class="sc">~</span> <span class="fu">pdq</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>)) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As with other regression models in R, you can inspect some details about the fit, like what the coefficients are estimated to be:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">report</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: wili 
+Model: ARIMA(2,0,0) w/ mean 
+
+Coefficients:
+         ar1      ar2  constant
+      1.4733  -0.5341    0.1065
+s.e.  0.0312   0.0312    0.0105
+
+sigma^2 estimated as 0.0828:  log likelihood=-126.94
+AIC=261.88   AICc=261.94   BIC=280.27</code></pre>
+</div>
+</div>
+<p>And now that we’ve fitted a model, we can use it to make a forecast. We’ll start by making a forecast for <code>h=25</code> weeks into the future. (Although usually for epidemiological forecasts, this would be a bit further than most models could make accurate or well-calibrated forecasts.) The following call to <code>forecast()</code> makes a prediction that starts from the end of the observed <code>flu_data</code> time-series.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>first_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(fit, <span class="at">h =</span> <span class="dv">25</span>) </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>first_forecast <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>(flu_data <span class="sc">|&gt;</span> <span class="fu">filter</span>(epiweek <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"2016-09-01"</span>))) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"WILI, US level"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"% of outpatient visits due to ILI"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="forecasting-concepts_files/figure-html/make-a-forecast-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Note that in the above plot we filtered the observed data so that the resulting plot wasn’t dominated by all of the historical seasons of data. The plot shows just last season’s observations and “forecasts” for 25 weeks of the 2017/2018 season. Note that the predictions are probabilistic in that they show a predicted mean (the solid line) and an 80% and 95% prediction interval.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that in general for predictive models you want to make sure that your model gives you a <strong>prediction</strong> interval and not a confidence interval. A prediction interval should (if your model is well “calibrated” – more on that later) cover the eventual observation with a long-run frequency equal to that of the nominal coverage rate. E.g. If you made 80% prediction intervals for 100 points, the prediction intervals should cover around 80 of the observations. A confidence interval is instead providing you with uncertainty about the <em>mean</em> of the distribution of eventual observations, it is not making a statement about the specific future observation.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Take 5 minutes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Look carefully at the forecast and pick out a few things that don’t look right to you and then a few things that you think seem reasonable.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>There is not exactly a “right” answer here, but a few things that jump out to us are:</p>
+<ul>
+<li>The fact that some of the prediction intervals have negative values. The percent of outpatient visits due to ILI cannot be negative! That doesn’t pass the sniff test.</li>
+<li>The mean predictions go up and then level off. There is no notion of a “seasonal peak” in the forecast.</li>
+<li>The uncertainty grows for a few horizons and then stays constant.</li>
+</ul>
+<p>This is a pretty bad forecast, but here are a few features of the forecast that pass the sniff test:</p>
+<ul>
+<li>For the first few horizons, the uncertainty gets wider.</li>
+<li>For the first few horizons, the predictions go up, which tracks with the recent data trends, and what we might expect from flu season in the early fall.</li>
+<li>The mean predictions and prediction intervals are smooth. Unless there is good reason for forecasts to be jagged, it tends to be the sign of a model that has not been overfit to have smooth-ish predictions. (Of course, it might still be a bad forecast.)</li>
+</ul>
+</div>
+</div>
+</div>
+<p>Can you brainstorm some ideas to help this model improve? This will be the topic of the upcoming sessions.</p>
+<section id="anatomy-of-a-fable-forecast" class="level2">
+<h2 class="anchored" data-anchor-id="anatomy-of-a-fable-forecast">Anatomy of a fable forecast</h2>
+<p>We will dive into this in more detail later in the course, but it might be interesting now to look under the hood of what format <code>fable</code> uses to store the forecast itself. Check it out:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(first_forecast)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "fbl_ts"     "tbl_ts"     "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>first_forecast</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A fable: 25 x 5 [7D]
+# Key:     region, .model [1]
+   region .model  epiweek             wili .mean
+   &lt;chr&gt;  &lt;chr&gt;   &lt;date&gt;            &lt;dist&gt; &lt;dbl&gt;
+ 1 nat    arima2… 2017-09-03 N(1.1, 0.083)  1.12
+ 2 nat    arima2… 2017-09-10  N(1.2, 0.26)  1.22
+ 3 nat    arima2… 2017-09-17  N(1.3, 0.48)  1.30
+ 4 nat    arima2… 2017-09-24   N(1.4, 0.7)  1.37
+ 5 nat    arima2… 2017-10-01  N(1.4, 0.89)  1.43
+ 6 nat    arima2… 2017-10-08     N(1.5, 1)  1.48
+ 7 nat    arima2… 2017-10-15   N(1.5, 1.2)  1.53
+ 8 nat    arima2… 2017-10-22   N(1.6, 1.3)  1.57
+ 9 nat    arima2… 2017-10-29   N(1.6, 1.3)  1.60
+10 nat    arima2… 2017-11-05   N(1.6, 1.4)  1.62
+# ℹ 15 more rows</code></pre>
+</div>
+</div>
+<p>The <code>first_forecast</code> object is <code>fbl_ts</code> which is a special kind of <code>tsibble</code>, which is in turn a special kind of <code>data.frame</code>. In this case, each horizon for which we’ve asked for a prediction has a row in the dataset. There is a <code>.mean</code> column where you can quickly see the predicted mean, and a <code>wili</code> column which contains values of class <code>dist</code>. Each of these represent the Normal distribution representing the predictive distribution for the WILI value at that horizon.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Take 2 minutes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What mean value do you think the forecast would settle at if we predicted out for a hundred weeks or more?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Here is the prediction for <code>h=25</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>first_forecast[<span class="dv">25</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A fable: 1 x 5 [7D]
+# Key:     region, .model [1]
+  region .model   epiweek           wili .mean
+  &lt;chr&gt;  &lt;chr&gt;    &lt;date&gt;          &lt;dist&gt; &lt;dbl&gt;
+1 nat    arima200 2018-02-18 N(1.7, 1.5)  1.74</code></pre>
+</div>
+</div>
+<p>Here is the overall mean of the dataset the model was fit to:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(flu_data<span class="sc">$</span>wili)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.77135</code></pre>
+</div>
+</div>
+<p>ARIMA models that meet certain regularity conditions will have forecasts that converge to the mean of the dataset.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="wrap-up" class="level1">
+<h1>Wrap up</h1>
+<ul>
+<li>Review what you’ve learned in this session with the <a href="../reference/learning_objectives">learning objectives</a></li>
+<li>Share your <a href="../reference/help">questions and thoughts</a></li>
+</ul>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-tsay2000time" class="csl-entry" role="listitem">
+Tsay, Ruey S. 2000. <span>“Time Series and Forecasting: Brief History and Future Research.”</span> <em>Journal of the American Statistical Association</em> 95 (450): 638–43.
+</div>
+</div>
+
+
+</section>
+
+<script data-goatcounter="https://nfidd.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/nfidd\.github\.io\/sismid\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/nfidd/sismid/blob/main/sessions/forecasting-concepts.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/nfidd/sismid/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
