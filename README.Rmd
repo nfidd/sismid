@@ -33,19 +33,21 @@ quarto::quarto_render()
 
 
 
+
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 
-All contributions to this project are gratefully acknowledged using the [`allcontributors` package](https://github.com/ropensci/allcontributors) following the [all-contributors](https://allcontributors.org) specification. Contributions of any kind are welcome!
+All contributions to this project are gratefully acknowledged using the [`allcontributors` package](https://github.com/ropensci/allcontributors) following the [allcontributors](https://allcontributors.org) specification. Contributions of any kind are welcome!
 
 ### Code
 
 
-<a href="https://github.com/nfidd/sismid/commits?author=sbfnk">sbfnk</a>, 
 <a href="https://github.com/nfidd/sismid/commits?author=seabbs">seabbs</a>, 
-<a href="https://github.com/nfidd/sismid/commits?author=kathsherratt">kathsherratt</a>, 
+<a href="https://github.com/nfidd/sismid/commits?author=sbfnk">sbfnk</a>, 
 <a href="https://github.com/nfidd/sismid/commits?author=nickreich">nickreich</a>, 
+<a href="https://github.com/nfidd/sismid/commits?author=kathsherratt">kathsherratt</a>, 
+<a href="https://github.com/nfidd/sismid/commits?author=trobacker">trobacker</a>, 
 <a href="https://github.com/nfidd/sismid/commits?author=github-actions[bot]">github-actions[bot]</a>, 
 <a href="https://github.com/nfidd/sismid/commits?author=dependabot[bot]">dependabot[bot]</a>, 
 <a href="https://github.com/nfidd/sismid/commits?author=jamesmbaazam">jamesmbaazam</a>, 
@@ -57,12 +59,13 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 ### Issues
 
 
-<a href="https://github.com/nfidd/sismid/issues?q=is%3Aissue+author%3Atrobacker">trobacker</a>
+<a href="https://github.com/nfidd/sismid/issues?q=is%3Aissue+author%3Aharryhoch">harryhoch</a>
 
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
 
 
 
