@@ -5,20 +5,34 @@ comments: false
 about:
   template: jolla
   links:
-    - icon: chat-fill
-      text: Dive into the course
-      href: sismid/sessions/introduction-and-course-overview.html
+    - icon: arrow-right-circle-fill
+      text: Nowcasting course
+      href: https://nfidd.github.io/sismid-nowcasting/
+    - icon: arrow-right-circle-fill
+      text: Forecasting & evaluation course
+      href: https://nfidd.github.io/sismid-forecasting/
     - icon: github
-      text: Visit us on GitHub
-      href: https://github.com/nfidd/nfidd
+      text: GitHub
+      href: https://github.com/nfidd
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-A course and living resource for learning about nowcasting and forecasting infectious disease dynamics originally developed by the [nfidd](https://nfidd.github.io/nfidd) team and adapted for [SISMID](https://sismid.sph.emory.edu/).
+::: {.callout-note}
+## This course is now taught as two courses
 
-We invite anyone to use the materials here in their own teaching and learning. For questions and discussion of the course or its content, we welcome all users to the [Discussion board](https://github.com/nfidd/sismid/discussions). We welcome all forms of [contributions, additions and suggestions](https://github.com/nfidd/sismid/issues) for improving the materials. 
+From 2026 the SISMID course runs as two standalone courses across the week:
+
+- **[Nowcasting](https://nfidd.github.io/sismid-nowcasting/)** (first half of the week) — epidemiological delays, their biases, the renewal equation and $R_t$, and nowcasting.
+- **[Forecasting & evaluation](https://nfidd.github.io/sismid-forecasting/)** (second half of the week) — forecasting models, forecast evaluation, ensembles, and collaborative hubs.
+
+The original **combined** materials remain available as an archive: see the [`v1.0.0` release](https://github.com/nfidd/sismid/releases/tag/v1.0.0) and the sessions linked in the sidebar.
+:::
+
+A course and living resource for learning about nowcasting and forecasting infectious disease dynamics, originally developed by the [nfidd](https://nfidd.github.io/nfidd) team and adapted for [SISMID](https://sismid.sph.emory.edu/).
+
+We invite anyone to use the materials here in their own teaching and learning. For questions and discussion of the course or its content, we welcome all users to the [Discussion board](https://github.com/nfidd/sismid/discussions). We welcome all forms of [contributions, additions and suggestions](https://github.com/nfidd/sismid/issues) for improving the materials.
 
 All materials here are provided under the permissive [MIT License](https://github.com/nfidd/sismid/blob/main/LICENSE).

@@ -1,6 +1,16 @@
 
 # Nowcasting and forecasting infectious disease dynamics
 
+> [!NOTE]
+> **This course is now taught as two standalone courses.**
+> - Nowcasting (first half of the week): <https://github.com/nfidd/sismid-nowcasting>
+> - Forecasting & evaluation (second half of the week): <https://github.com/nfidd/sismid-forecasting>
+>
+> This repository is now an umbrella landing page linking to both. The original
+> combined materials are preserved as the
+> [`v1.0.0`](https://github.com/nfidd/sismid/releases/tag/v1.0.0) release and
+> remain browsable in the sidebar.
+
 This repository contains the material to create the nfidd sismid course
 page.
 
