@@ -1,16 +1,6 @@
 
 # Nowcasting and forecasting infectious disease dynamics
 
-> [!NOTE]
-> **This course is now taught as two standalone courses.**
-> - Nowcasting (first half of the week): <https://github.com/nfidd/sismid-nowcasting>
-> - Forecasting & evaluation (second half of the week): <https://github.com/nfidd/sismid-forecasting>
->
-> This repository is now an umbrella landing page linking to both. The original
-> combined materials are preserved as the
-> [`v1.0.0`](https://github.com/nfidd/sismid/releases/tag/v1.0.0) release and
-> remain browsable in the sidebar.
-
 This repository contains the material to create the nfidd sismid course
 page.
 
@@ -33,20 +23,23 @@ quarto::quarto_render()
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+
 <!-- prettier-ignore-start -->
+
 <!-- markdownlint-disable -->
 
 All contributions to this project are gratefully acknowledged using the
 [`allcontributors` package](https://github.com/ropensci/allcontributors)
-following the [all-contributors](https://allcontributors.org)
+following the [allcontributors](https://allcontributors.org)
 specification. Contributions of any kind are welcome!
 
 ### Code
 
-<a href="https://github.com/nfidd/sismid/commits?author=sbfnk">sbfnk</a>,
 <a href="https://github.com/nfidd/sismid/commits?author=seabbs">seabbs</a>,
-<a href="https://github.com/nfidd/sismid/commits?author=kathsherratt">kathsherratt</a>,
+<a href="https://github.com/nfidd/sismid/commits?author=sbfnk">sbfnk</a>,
 <a href="https://github.com/nfidd/sismid/commits?author=nickreich">nickreich</a>,
+<a href="https://github.com/nfidd/sismid/commits?author=kathsherratt">kathsherratt</a>,
+<a href="https://github.com/nfidd/sismid/commits?author=trobacker">trobacker</a>,
 <a href="https://github.com/nfidd/sismid/commits?author=github-actions[bot]">github-actions\[bot\]</a>,
 <a href="https://github.com/nfidd/sismid/commits?author=dependabot[bot]">dependabot\[bot\]</a>,
 <a href="https://github.com/nfidd/sismid/commits?author=jamesmbaazam">jamesmbaazam</a>,
@@ -55,8 +48,10 @@ specification. Contributions of any kind are welcome!
 
 ### Issues
 
-<a href="https://github.com/nfidd/sismid/issues?q=is%3Aissue+author%3Atrobacker">trobacker</a>
+<a href="https://github.com/nfidd/sismid/issues?q=is%3Aissue+author%3Aharryhoch">harryhoch</a>
 
 <!-- markdownlint-enable -->
+
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
